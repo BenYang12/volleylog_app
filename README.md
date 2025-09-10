@@ -44,24 +44,20 @@ This guide walks you through setting up both the **server** and **client** for V
 ---
 
 ## 🗂️ 1. Clone the Repository
-```bash
 git clone https://github.com/BenYang12/volleylog.git
 cd volleylog
 
 ## 🗂️ 2. Navigate to server folder and run
-```bash
 cd server
 npm install
 Inside /server, create a file named .env with the following content:MONGO_URI="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/volleylog?retryWrites=true&w=majority"
 PORT=7500(Replace <username>, <password>, and <cluster> with your MongoDB Atlas credentials.)
 npm run dev
-
 you should see:
 MongoDB Atlas connected
 Server running on port 7500
 
 ## 🗂️ 3. Navigate to client folder and run
-```bash
 cd client
 npm install
 npm run dev
