@@ -30,7 +30,7 @@ async function seedIfEmpty() {
       clean: 145,
       vertical: 40,
       bodyweight: 168,
-      note: "Baseline test",
+      note: "Example 1",
     },
     {
       date: new Date(Date.now() - 86400000),
@@ -39,7 +39,7 @@ async function seedIfEmpty() {
       clean: 165,
       vertical: 27,
       bodyweight: 169,
-      note: "Great session",
+      note: "Example 2",
     },
     {
       date: new Date(Date.now() - 2 * 86400000),
@@ -51,7 +51,7 @@ async function seedIfEmpty() {
     },
   ]);
 
-  console.log(" Seeded example entries.");
+  console.log(" Example 3");
 }
 
 //now its time to connnect to MongoDB and start server
