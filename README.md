@@ -44,6 +44,7 @@ This guide walks you through setting up both the **server** and **client** for V
 ---
 
 ## 🗂️ 1. Clone the Repository
+```bash
 git clone https://github.com/BenYang12/volleylog.git
 cd volleylog
 
