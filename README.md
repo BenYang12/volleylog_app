@@ -3,14 +3,15 @@
 # 🏐 Volleylog
 
 A full-stack MERN application that lets volleyball athletes log their training progress.  
-Track core metrics like **squat, bench press, hang clean, vertical jump, and bodyweight** to measure improvements, set goals, and stay motivated.
+
+Users can track core volleyball performance metrics like **squat, bench press, hang clean, vertical jump, and bodyweight** to measure progress, set goals, and stay motivated.
 
 ---
 
 ## ✨ Features
 
-- **Full CRUD**: Add, edit, and delete training entries.   
-- **Responsive UI**: Built with React (Vite), styled with custom CSS.  
+- **Full CRUD**: Add, edit, and delete entries   
+- **Responsive UI**: Built with React, styled with CSS.  
 - **Data persistence**: Entries stored in MongoDB Atlas via Mongoose models.  
 - **REST API**: Express backend with clean routes and error handling.  
 - **State management**: React Hooks (`useState`, `useEffect`) keep UI in sync.  
@@ -20,7 +21,7 @@ Track core metrics like **squat, bench press, hang clean, vertical jump, and bod
 
 ## 🚀 Tech Stack
 
-- **Frontend**: React (Vite), JavaScript, CSS  
+- **Frontend**: React, JavaScript, CSS  
 - **Backend**: Node.js, Express  
 - **Database**: MongoDB Atlas, Mongoose  
 
