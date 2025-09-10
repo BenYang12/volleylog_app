@@ -53,8 +53,10 @@ cd volleylog
 ## 🗂️ 2. Navigate to server folder and run
 cd server
 npm install
+
 Inside /server, create a file named .env with the following content:MONGO_URI="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/volleylog?retryWrites=true&w=majority"
 PORT=7500(Replace <username>, <password>, and <cluster> with your MongoDB Atlas credentials.)
+
 npm run dev
 you should see:
 MongoDB Atlas connected
