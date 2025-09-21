@@ -1,42 +1,94 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  --bg: #07080a;
+  --card: #0f1117;
+  --text: white;
+  --muted: #80868c;
+  --accent: #4f8cff;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+* {
+  box-sizing: border-box; /*actual size -> include padding and border*/
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    Segoe UI,
+    Roboto,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+nav {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  padding: 11px 15px;
+  border-bottom: 1px solid #1b1d27;
+}
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+nav a.active,
+nav a:hover {
+  background: #222531;
+}
+
+.container {
+  max-width: 990px;
+  margin: 25px auto;
+  padding: 0 15px;
 }
 
 .card {
-  padding: 2em;
+  background: var(--card);
+  border: 1px solid #222531;
+  border-radius: 13px;
+  padding: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 }
 
-.read-the-docs {
-  color: #888;
+.grid {
+  display: grid;
+  gap: 15px;
+}
+.grid.cards {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+input,
+button,
+select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #2a2e3c;
+  background: #0f1117;
+  color: var(--text);
+}
+button {
+  cursor: pointer;
+}
+button.primary {
+  background: var(--accent);
+  border: none;
+  color: white;
+}
+label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+.form-row > div {
+  display: flex;
+  flex-direction: column;
 }
