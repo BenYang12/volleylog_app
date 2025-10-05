@@ -1,0 +1,19 @@
+
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS metrics (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  date DATE NOT NULL,
+  squat_lbs INTEGER NOT NULL,
+  bench_lbs INTEGER NOT NULL,
+  shoulder_lbs INTEGER NOT NULL,
+  vertical_jump_lbs INTEGER NOT NULL,
+  plank_seconds INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);

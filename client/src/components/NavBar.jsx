@@ -1,34 +1,35 @@
-//NavLink is a link component that knows if it's active -> enhanced version of Link component
-//I will use NavLink cus its easier to style
-//useNavigate is a hook -> returns function that allows me to navigate to different routes in response to events/conditions, rather than user interaction
-import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth.js";
+//navbar
+//include image to make it look more official
 
-export default function NavBar() {
-  const navigate = useNavigate();
-  const { user, logout } = useAuth(); //get current logged-in user
+import { Link } from "react-router-dom";
 
-  async function handleLogout() {
-    await logout(); //clear session server-side
-    navigate("/login");
-  }
-
+export default function NavBar({ user, onLogout }) {
   return (
-    <nav>
-      <NavLink to="/metrics">Metrics</NavLink>
-      <NavLink to="/progress">Progress</NavLink>
-      <div style={{ marginLeft: "auto" }}>
-        {user ? (
-          <>
-            <span style={{ marginRight: 13, opacity: 0.8 }}>
-              Hi, {user.username}
-            </span>
-            <button onClick={handleLogout}>Logout</button>
-          </>
-        ) : (
-          <NavLink to="/login">Login</NavLink>
-        )}
+    <nav className="navbar">
+      <div className="brand">
+        <img
+          className="brand__logo"
+          src="/volleyball.png"
+          alt="Volleylog logo"
+        />
+        <h3 className="brand__name">Volleylog</h3>
       </div>
+
+      {user ? (
+        <div className="nav__actions">
+          <Link to="/">Home</Link>
+          <Link to="/charts">Visualizations</Link>
+          <button onClick={onLogout} className="btn btn--ghost">
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div className="nav__actions">
+          <Link to="/auth" className="btn btn--primary">
+            Login / Register
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }
