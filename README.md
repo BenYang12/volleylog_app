@@ -29,7 +29,8 @@ DISCLAIMER: DO NOT ENTER YOUR REAL EMAIL/PASSWORD WHEN TESTING MY APPLICATION
 ---
 
 ## 📸 Screenshots
-<img width="1036" height="747" alt="Screenshot 2025-09-10 at 10 57 29 AM" src="https://github.com/user-attachments/assets/9754c531-999a-43eb-9a33-5c397a207190" />
+<img width="1512" height="853" alt="Screenshot 2025-10-05 at 12 48 42 AM" src="https://github.com/user-attachments/assets/d18a51f4-c4fb-49f8-84ff-dcb4b357e144" />
+<img width="1509" height="849" alt="Screenshot 2025-10-05 at 12 49 35 AM" src="https://github.com/user-attachments/assets/bbeb7520-7403-4604-bc06-ef026c0928c7" />
 
 
 # ⚙️ Installation & Setup Guide for Volleylog
