@@ -1,48 +1,44 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import MetricsPage from "./pages/MetricsPage.jsx";
-import ProgressPage from "./pages/ProgressPage.jsx";
+import AuthPage from "./pages/AuthPage.jsx";
+import Home from "./pages/Home.jsx";
+import Charts from "./pages/Charts.jsx";
+import { api } from "./services/api.js";
 
-//AuthProvider -> component that wraps application to provide authentication context and state such as current user's log in status and authentication functions to its child components
-//useAuth hook is custom hook that components use to easily access said authentication context
-import { AuthProvider, useAuth } from "./hooks/useAuth.js"; //custom authentication context that tracks whos locgged in
-
-//only renders children if user is logged in
-function PrivateRoute({ children }) {
-  const { user } = useAuth();
-  return user ? children : <Navigate to="/login" replace />; //navigate to /login if not logged in
-}
-
-//todo in future: put routes in separate file for more modular code
-
-//App component
-//<Routes> block decides what main page to render (Login, metrics, progress)
-//Metrics and progress should be protected -> use PrivateRoute
 export default function App() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  // Check session on load
+  useEffect(() => {
+    api.get("/auth/me").then((res) => {
+      if (res.ok) return res.json().then(setUser);
+    });
+  }, []);
+
+  function handleLogout() {
+    api.post("/auth/logout").then(() => {
+      setUser(null);
+      navigate("/auth");
+    });
+  }
+
   return (
-    <AuthProvider>
-      <NavBar />
+    <>
+      <NavBar user={user} onLogout={handleLogout} />
       <Routes>
+        <Route path="/auth" element={<AuthPage onAuthed={setUser} />} />
         <Route
-          path="/metrics"
-          element={
-            <PrivateRoute>
-              <MetricsPage />
-            </PrivateRoute>
-          }
+          path="/"
+          element={user ? <Home /> : <Navigate to="/auth" replace />}
         />
-        <Route path="/login" element={<LoginPage />} />
         <Route
-          path="/progress"
-          element={
-            <PrivateRoute>
-              <ProgressPage />
-            </PrivateRoute>
-          }
+          path="/charts"
+          element={user ? <Charts /> : <Navigate to="/auth" replace />}
         />
-        <Route path="*" element={<Navigate to="/metrics" replace />} />
+        <Route path="*" element={<Navigate to={user ? "/" : "/auth"} />} />
       </Routes>
-    </AuthProvider>
+    </>
   );
 }
