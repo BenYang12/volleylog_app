@@ -43,7 +43,7 @@ Instructions for setting up server and client locally so you can log your progre
 - PostgreSQL
 - Git
 
-Git
+
 ---
 
 ## 🗂️ How to Run
