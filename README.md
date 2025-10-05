@@ -2,29 +2,30 @@
 
 # 🏐 Volleylog
 
-A full-stack MERN application that lets volleyball athletes log their training progress.  
+A full-stack web application that lets volleyball athletes log their training progress.
 
-Users can track core volleyball performance metrics like **squat, bench press, hang clean, vertical jump, and bodyweight** to measure progress, set goals, and stay motivated.
+Track core performance metrics — barbell squat, bench press, shoulder press, vertical jump, and plank — and visualize progress with charts
+
+DISCLAIMER: DO NOT ENTER YOUR REAL EMAIL/PASSWORD WHEN TESTING MY APPLICATION
 
 ---
 
 ## ✨ Features
 
-- **Full CRUD**: Add, edit, and delete entries   
-- **Responsive UI**: Built with React, styled with CSS.  
-- **Data persistence**: Entries stored in MongoDB Atlas via Mongoose models.  
-- **REST API**: Express backend with clean routes and error handling.  
-- **State management**: React Hooks (`useState`, `useEffect`) keep UI in sync.  
-- **.env support**: Securely load MongoDB URI and server port.  
+- Full CRUD for every entry (create, read, update, delete)
+- Auth & sessions (register/login/logout) with server-side sessions
+- Charts: Progress visualized with Chart.js
+- Responsive UI: React + CSS (Grid/Flexbox)
+- PostgreSQL persistence with node-postgres
+- .env support for secrets and config
 
 ---
 
 ## 🚀 Tech Stack
 
-- **Frontend**: React, JavaScript, CSS  
-- **Backend**: Node.js, Express  
-- **Database**: MongoDB Atlas, Mongoose  
-
+- Frontend: React(Vite), Chart.js, CSS
+- Backend: Node.js, Express
+- Database: PostgreSQL
 ---
 
 ## 📸 Screenshots
@@ -32,35 +33,43 @@ Users can track core volleyball performance metrics like **squat, bench press, h
 
 
 # ⚙️ Installation & Setup Guide for Volleylog
-
-This guide walks you through setting up both the **server** and **client** for Volleylog locally.
+Instructions for setting up server and client locally so you can log your progress!
 
 ---
 
 ## 📦 Prerequisites
-- [Node.js](https://nodejs.org/) 
-- [npm](https://www.npmjs.com/)  
-- A [MongoDB Atlas](https://www.mongodb.com/atlas/database) account & cluster  
+- Node.js (LTS) + npm
+- PostgreSQL
+- Git
 
+Git
 ---
 
 ## 🗂️ How to Run
 ```bash
-## 🗂️ 1. Clone the Repository
-git clone https://github.com/BenYang12/volleylog.git
-cd volleylog
+## 🗂️ 1. Clone the Repository and set up database
+git clone https://github.com/BenYang12/volleylog_app.git
+cd volleylog_app
+createdb -h localhost -p 5432 -U "$(whoami)" volleylog
+
 
 ## 🗂️ 2. Navigate to server folder and run
 cd server
 npm install
 
-Inside /server, create a file named .env with the following content:MONGO_URI="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/volleylog?retryWrites=true&w=majority"
-PORT=7500(Replace <username>, <password>, and <cluster> with your MongoDB Atlas credentials.)
+create server/.env
+PORT=4000
+SESSION_SECRET=<a long random string>
+# If you use your mac username without password:
+DATABASE_URL=postgresql://<your_username>@localhost:5432/volleylog
+# Or with password:
+# DATABASE_URL=postgresql://<role>:<password>@localhost:5432/volleylog
+CLIENT_ORIGIN=http://localhost:5173
 
+
+npm run db:init
 npm run dev
-you should see:
-MongoDB Atlas connected
-Server running on port 7500
+
 
 ## 🗂️ 3. Navigate to client folder and run
 cd client
