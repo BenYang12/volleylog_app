@@ -1,3 +1,8 @@
+//Metrics CRUD API, protected by requireAuth middleware
+//POST /api/metrics/ creates a new metric entry for logged-in user
+//GET /api/metrics/  Fetch all metrics for the logged-in user
+//PUT /api/metrics/:id Update specific metric (only if owned by user)
+//DELETE /api/metrics/:id Delete specific metric (only if owned by user)
 import { pool } from "../db.js";
 import { requireAuth } from "../middleware/auth.js";
 import { Router } from "express";
@@ -30,7 +35,7 @@ router.post("/", async (req, res) => {
       plank_seconds,
     ],
   );
-  res.status(201).json(rows[0]);
+  res.status(201).json(rows[0]); //201 -> A new resource was succesfully created, sends JSON back to client
 });
 
 // Read

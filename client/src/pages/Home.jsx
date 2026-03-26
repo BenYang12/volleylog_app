@@ -4,8 +4,8 @@ import { api } from "../services/api.js";
 import MetricForm from "../components/MetricForm.jsx";
 
 export default function Home() {
-  const [editing, setEditing] = useState(null);
-  const [items, setItems] = useState([]);
+  const [editing, setEditing] = useState(null); //state
+  const [items, setItems] = useState([]); //state
 
   useEffect(() => {
     load();
@@ -14,7 +14,7 @@ export default function Home() {
     api
       .get("/metrics")
       .then((res) => res.json())
-      .then(setItems);
+      .then(setItems); //get from back end then set items
   }
 
   async function createEntry(data) {

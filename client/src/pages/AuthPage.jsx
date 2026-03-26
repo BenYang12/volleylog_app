@@ -1,3 +1,5 @@
+//handles switching between login
+
 import { api } from "../services/api.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
