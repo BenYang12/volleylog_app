@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 /*Tracks performance metrics linked to user_id*/
-/*Columns: date, squat_lbs, bench_lbs, shoulder_lbs, vertical_jump_lbs, plank_seconds.*/
+/*Columns: date, squat_lbs, bench_lbs, shoulder_lbs, vertical_jump_lbs, plank_seconds, sprint_seconds.*/
 CREATE TABLE IF NOT EXISTS metrics (
   id SERIAL PRIMARY KEY, /*SERIAL -> Auto-incrementing integer, */
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE, /*CASCADE -> if user is deleted from table, all metrics with that user_id are automatically deleted*/
@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS metrics (
   shoulder_lbs INTEGER NOT NULL,
   vertical_jump_lbs INTEGER NOT NULL,
   plank_seconds INTEGER NOT NULL,
+  sprint_seconds NUMERIC(4,2) NOT NULL,
   created_at TIMESTAMP DEFAULT NOW()
 );
 

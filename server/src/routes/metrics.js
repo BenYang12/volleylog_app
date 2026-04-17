@@ -20,11 +20,12 @@ router.post("/", async (req, res) => {
     shoulder_lbs,
     vertical_jump_lbs,
     plank_seconds,
+    sprint_seconds,
   } = req.body;
   const { rows } = await pool.query(
-    `INSERT INTO metrics(user_id, date, squat_lbs, bench_lbs, shoulder_lbs, vertical_jump_lbs, plank_seconds)
-     VALUES($1,$2,$3,$4,$5,$6,$7)
-     RETURNING id, user_id, date, squat_lbs, bench_lbs, shoulder_lbs, vertical_jump_lbs, plank_seconds`,
+    `INSERT INTO metrics(user_id, date, squat_lbs, bench_lbs, shoulder_lbs, vertical_jump_lbs, plank_seconds, sprint_seconds)
+     VALUES($1,$2,$3,$4,$5,$6,$7,$8)
+     RETURNING id, user_id, date, squat_lbs, bench_lbs, shoulder_lbs, vertical_jump_lbs, plank_seconds, sprint_seconds`,
     [
       u.id,
       date,
@@ -33,6 +34,7 @@ router.post("/", async (req, res) => {
       shoulder_lbs,
       vertical_jump_lbs,
       plank_seconds,
+      sprint_seconds,
     ],
   );
   res.status(201).json(rows[0]); //201 -> A new resource was succesfully created, sends JSON back to client
@@ -43,7 +45,7 @@ router.get("/", async (req, res) => {
   const u = req.session.user;
   const { rows } = await pool.query(
     `SELECT id, user_id, to_char(date, 'YYYY-MM-DD') AS date,
-            squat_lbs, bench_lbs, shoulder_lbs, vertical_jump_lbs, plank_seconds
+            squat_lbs, bench_lbs, shoulder_lbs, vertical_jump_lbs, plank_seconds, sprint_seconds
      FROM metrics WHERE user_id=$1 ORDER BY date ASC, id ASC`,
     [u.id],
   );
@@ -61,11 +63,12 @@ router.put("/:id", async (req, res) => {
     shoulder_lbs,
     vertical_jump_lbs,
     plank_seconds,
+    sprint_seconds,
   } = req.body;
   const { rowCount, rows } = await pool.query(
-    `UPDATE metrics SET date=$1, squat_lbs=$2, bench_lbs=$3, shoulder_lbs=$4, vertical_jump_lbs=$5, plank_seconds=$6
-     WHERE id=$7 AND user_id=$8
-     RETURNING id, user_id, date, squat_lbs, bench_lbs, shoulder_lbs, vertical_jump_lbs, plank_seconds`,
+    `UPDATE metrics SET date=$1, squat_lbs=$2, bench_lbs=$3, shoulder_lbs=$4, vertical_jump_lbs=$5, plank_seconds=$6, sprint_seconds=$7
+     WHERE id=$8 AND user_id=$9
+     RETURNING id, user_id, date, squat_lbs, bench_lbs, shoulder_lbs, vertical_jump_lbs, plank_seconds, sprint_seconds`,
     [
       date,
       squat_lbs,
@@ -73,6 +76,7 @@ router.put("/:id", async (req, res) => {
       shoulder_lbs,
       vertical_jump_lbs,
       plank_seconds,
+      sprint_seconds,
       id,
       u.id,
     ],

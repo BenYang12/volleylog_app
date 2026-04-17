@@ -12,6 +12,7 @@ export default function MetricList({ items, onEdit, onDelete }) {
           <th>Shoulder</th>
           <th>Vert</th>
           <th>Plank</th>
+          <th>Sprint</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -26,6 +27,7 @@ export default function MetricList({ items, onEdit, onDelete }) {
             <td>{row.shoulder_lbs}</td>
             <td>{row.vertical_jump_lbs}</td>
             <td>{row.plank_seconds}</td>
+            <td>{row.sprint_seconds}</td>
 
             <td className="table__actions">
               <button className="btn" onClick={() => onEdit(row)}>

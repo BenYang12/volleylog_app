@@ -9,6 +9,7 @@ const empty = {
   shoulder_lbs: "",
   vertical_jump_lbs: "",
   plank_seconds: "",
+  sprint_seconds: "",
 };
 
 export default function MetricForm({ initial = null, onSave, onCancel }) {
@@ -36,6 +37,7 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
       shoulder_lbs: Number(form.shoulder_lbs),
       vertical_jump_lbs: Number(form.vertical_jump_lbs),
       plank_seconds: Number(form.plank_seconds),
+      sprint_seconds: Number(form.sprint_seconds),
     });
     if (!initial) setForm(empty);
   }
@@ -94,6 +96,15 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
         <input
           value={form.plank_seconds}
           onChange={(e) => update("plank_seconds", e.target.value)}
+          required
+        />
+      </label>
+
+      <label>
+        Sprint (seconds)
+        <input
+          value={form.sprint_seconds}
+          onChange={(e) => update("sprint_seconds", e.target.value)}
           required
         />
       </label>

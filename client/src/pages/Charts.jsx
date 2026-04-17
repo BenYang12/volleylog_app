@@ -29,12 +29,17 @@ export default function Charts() {
   const canvasRef = useRef(null);
   const [metrics, setMetrics] = useState([]);
 
-  // Load data once using useEffect hook
+  // Load data on mount and poll every 30 seconds for live updates
   useEffect(() => {
-    api
-      .get("/metrics")
-      .then((r) => r.json())
-      .then(setMetrics);
+    const fetchMetrics = () =>
+      api
+        .get("/metrics")
+        .then((r) => r.json())
+        .then(setMetrics);
+
+    fetchMetrics();
+    const interval = setInterval(fetchMetrics, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   // Build chart whenever data changes
@@ -96,6 +101,15 @@ export default function Charts() {
         borderColor: colors.yellow,
         backgroundColor: fill(colors.yellow),
         pointBackgroundColor: colors.yellow,
+        tension: 0.3,
+        fill: true,
+      },
+      {
+        label: "Sprint (sec)",
+        data: metrics.map((m) => m.sprint_seconds),
+        borderColor: "rgba(249, 115, 22, 1)",
+        backgroundColor: "rgba(249, 115, 22, 0.15)",
+        pointBackgroundColor: "rgba(249, 115, 22, 1)",
         tension: 0.3,
         fill: true,
       },
