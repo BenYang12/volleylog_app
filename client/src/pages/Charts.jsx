@@ -116,7 +116,10 @@ export default function Charts() {
     ];
 
     // clearing
-    if (chartRef.current) chartRef.current.destroy();
+    if (chartRef.current) {
+      chartRef.current.destroy();
+      chartRef.current = null;
+    }
 
     chartRef.current = new Chart(canvasRef.current.getContext("2d"), {
       type: "line",

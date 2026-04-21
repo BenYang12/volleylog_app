@@ -18,7 +18,7 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
 
   // When `initial` changes, load those values into the form.
   useEffect(() => {
-    if (initial) setForm(initial);
+    setForm(initial ?? empty);
   }, [initial]);
 
   //my handleupdate funciton
