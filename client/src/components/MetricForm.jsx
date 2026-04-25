@@ -54,10 +54,11 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
         />
       </label>
 
-      {/* Squat */}
       <label>
         Barbell Squat (lbs)
         <input
+          type="number"
+          min="0"
           value={form.squat_lbs}
           onChange={(e) => update("squat_lbs", e.target.value)}
           required
@@ -67,6 +68,8 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
       <label>
         Barbell Bench Press (lbs)
         <input
+          type="number"
+          min="0"
           value={form.bench_lbs}
           onChange={(e) => update("bench_lbs", e.target.value)}
           required
@@ -76,6 +79,8 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
       <label>
         Shoulder Press (lbs)
         <input
+          type="number"
+          min="0"
           value={form.shoulder_lbs}
           onChange={(e) => update("shoulder_lbs", e.target.value)}
           required
@@ -85,6 +90,8 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
       <label>
         Vertical Jump (inches)
         <input
+          type="number"
+          min="0"
           value={form.vertical_jump_lbs}
           onChange={(e) => update("vertical_jump_lbs", e.target.value)}
           required
@@ -94,6 +101,8 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
       <label>
         Plank (seconds)
         <input
+          type="number"
+          min="0"
           value={form.plank_seconds}
           onChange={(e) => update("plank_seconds", e.target.value)}
           required
@@ -103,6 +112,8 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
       <label>
         Sprint (seconds)
         <input
+          type="number"
+          min="0"
           value={form.sprint_seconds}
           onChange={(e) => update("sprint_seconds", e.target.value)}
           required

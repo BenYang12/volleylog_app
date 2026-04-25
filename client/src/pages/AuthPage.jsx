@@ -7,22 +7,25 @@ import { useNavigate } from "react-router-dom";
 export default function AuthPage({ onAuthed }) {
   const [mode, setMode] = useState("login");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    e.preventDefault(); // don't reload page
+    e.preventDefault();
+    if (submitting) return;
     setError("");
+    setSubmitting(true);
     const path = mode === "login" ? "/auth/login" : "/auth/register";
     const res = await api.post(path, { email, password });
     if (!res.ok) {
-      // show server error
       const msg = (await res.json()).error || "Failed";
       setError(msg);
+      setSubmitting(false);
       return;
     }
-    const user = await res.json(); // success → store user + go home
+    const user = await res.json();
     onAuthed(user);
     navigate("/");
   }
@@ -38,6 +41,7 @@ export default function AuthPage({ onAuthed }) {
         <label>
           Email
           <input
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -54,8 +58,8 @@ export default function AuthPage({ onAuthed }) {
           />
         </label>
 
-        <button type="submit">
-          {mode === "login" ? "Login" : "Create account"}
+        <button type="submit" disabled={submitting}>
+          {submitting ? "Please wait…" : mode === "login" ? "Login" : "Create account"}
         </button>
       </form>
 

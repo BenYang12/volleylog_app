@@ -29,17 +29,12 @@ export default function Charts() {
   const canvasRef = useRef(null);
   const [metrics, setMetrics] = useState([]);
 
-  // Load data on mount and poll every 30 seconds for live updates
   useEffect(() => {
-    const fetchMetrics = () =>
-      api
-        .get("/metrics")
-        .then((r) => r.json())
-        .then(setMetrics);
-
-    fetchMetrics();
-    const interval = setInterval(fetchMetrics, 30000);
-    return () => clearInterval(interval);
+    api
+      .get("/metrics")
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then(setMetrics)
+      .catch(() => {});
   }, []);
 
   // Build chart whenever data changes
@@ -115,12 +110,6 @@ export default function Charts() {
       },
     ];
 
-    // clearing
-    if (chartRef.current) {
-      chartRef.current.destroy();
-      chartRef.current = null;
-    }
-
     chartRef.current = new Chart(canvasRef.current.getContext("2d"), {
       type: "line",
       data: { labels, datasets },
@@ -140,7 +129,10 @@ export default function Charts() {
       },
     });
 
-    return () => chartRef.current?.destroy();
+    return () => {
+      chartRef.current?.destroy();
+      chartRef.current = null;
+    };
   }, [metrics]);
 
   return (

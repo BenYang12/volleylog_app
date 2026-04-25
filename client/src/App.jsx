@@ -12,17 +12,17 @@ import Charts from "./pages/Charts.jsx";
 import { api } from "./services/api.js"; //helper for talking to backend
 
 export default function App() {
-  const [user, setUser] = useState(null); //user starts as null
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Check session on load
-  //runs once when component first renders
   useEffect(() => {
-    api.get("/auth/me").then((res) => {
-      //on mount: sets user if session exists
-      //call /auth/me on backend
-      if (res.ok) return res.json().then(setUser); //response is OK, converts JSON to a JS object and stores it in user via setUser
-    }); //lets app remember logged in users via session cookie
+    api
+      .get("/auth/me")
+      .then((res) => {
+        if (res.status === 200) return res.json().then(setUser);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   function handleLogout() {
@@ -32,6 +32,8 @@ export default function App() {
       navigate("/auth"); //redirect to /auth
     });
   }
+
+  if (loading) return null;
 
   return (
     <>

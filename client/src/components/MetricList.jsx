@@ -1,6 +1,6 @@
 export default function MetricList({ items, onEdit, onDelete }) {
   // Empty state: show a reminder
-  if (!items.length) return <p>No entries yet. Log your first one!</p>;
+  if (!items?.length) return <p>No entries yet. Log your first one!</p>;
 
   return (
     <table className="table">

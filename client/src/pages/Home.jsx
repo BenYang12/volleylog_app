@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import MetricList from "../components/MetricList.jsx";
 import { api } from "../services/api.js";
 import MetricForm from "../components/MetricForm.jsx";
@@ -7,15 +7,17 @@ export default function Home() {
   const [editing, setEditing] = useState(null); //state
   const [items, setItems] = useState([]); //state
 
-  useEffect(() => {
-    load();
-  }, []);
-  function load() {
+  const load = useCallback(() => {
     api
       .get("/metrics")
-      .then((res) => res.json())
-      .then(setItems); //get from back end then set items
-  }
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then(setItems)
+      .catch(() => setItems([]));
+  }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
 
   async function createEntry(data) {
     const res = await api.post("/metrics", data);

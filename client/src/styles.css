@@ -216,7 +216,7 @@ body {
 /* Chart block */
 .chart {
   background: #ffffff;
-  border: 1/5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 1rem;

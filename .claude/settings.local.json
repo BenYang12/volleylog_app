@@ -3,7 +3,11 @@
     "allow": [
       "Bash(git commit *)",
       "Bash(git push *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(list\\(d['packages'].keys\\(\\)\\)[:20]\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('/Users/benjaminyang/code/Portfolio-Projects/volleylog_app/server/node_modules/express/package.json'\\)\\); print\\('server/node_modules express:', d['version']\\)\")",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('/Users/benjaminyang/code/Portfolio-Projects/volleylog_app/node_modules/express/package.json'\\)\\); print\\('root node_modules express:', d['version']\\)\")"
     ]
   }
 }

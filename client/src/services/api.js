@@ -12,11 +12,12 @@
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
 //example final URL -> http://localhost:4000/api/metrics
 
-//helper around fetch
 function request(path, options = {}) {
+  const headers = { ...(options.headers || {}) };
+  if (options.body) headers["Content-Type"] = "application/json";
   return fetch(`${BASE_URL}${path}`, {
-    credentials: "include", //always include cookies: send cookies (session cookie) with every request
-    headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+    credentials: "include",
+    headers,
     ...options,
   });
 }
