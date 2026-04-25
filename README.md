@@ -78,28 +78,51 @@ git clone https://github.com/BenYang12/volleylog_app.git
 cd volleylog_app
 ```
 
-### 🗂️ 2. Set Up the Database
+---
 
-Create a PostgreSQL database and run the schema file to set up your tables:
+### 🐳 Option A — Docker (recommended)
+
+Requires [Docker Desktop](https://www.docker.com/products/docker-desktop/). Starts the database, server, and client in one command:
 
 ```bash
-psql -U your_username -d volleylog -f server/src/sql/schema.sql
+docker compose up
 ```
 
-### 🗂️ 3. Start the Server
+Open `http://localhost` in your browser.
+
+---
+
+### 💻 Option B — Local Dev
+
+#### 2. Set Up the Database
+
+```bash
+createdb volleylog
+```
+
+#### 3. Configure the Server
 
 ```bash
 cd server
 npm install
+cp .env.example .env
 ```
 
-Create a `.env` file inside `/server`:
+Edit `server/.env` and set your local Postgres username:
 
 ```
-DATABASE_URL=postgresql://username:password@localhost:5432/volleylog
-PORT=7500
+DATABASE_URL=postgresql://your_mac_username@localhost:5432/volleylog
+PORT=4000
 SESSION_SECRET=your_session_secret_here
 ```
+
+Initialize the schema:
+
+```bash
+npm run db:init
+```
+
+#### 4. Start the Server
 
 ```bash
 npm run dev
@@ -108,14 +131,13 @@ npm run dev
 You should see:
 
 ```
-PostgreSQL connected
-Server running on port 7500
+Server listening on 4000
 ```
 
-### 🗂️ 4. Start the Client
+#### 5. Start the Client
 
 ```bash
-cd client
+cd ../client
 npm install
 npm run dev
 ```

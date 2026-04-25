@@ -28,9 +28,9 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
   }
 
   //handlesubmit function
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault(); //don't forget this
-    onSave({
+    const ok = await onSave({
       ...form,
       squat_lbs: Number(form.squat_lbs),
       bench_lbs: Number(form.bench_lbs),
@@ -39,7 +39,7 @@ export default function MetricForm({ initial = null, onSave, onCancel }) {
       plank_seconds: Number(form.plank_seconds),
       sprint_seconds: Number(form.sprint_seconds),
     });
-    if (!initial) setForm(empty);
+    if (ok && !initial) setForm(empty);
   }
 
   return (

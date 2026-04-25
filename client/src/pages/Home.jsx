@@ -21,7 +21,8 @@ export default function Home() {
 
   async function createEntry(data) {
     const res = await api.post("/metrics", data);
-    if (res.ok) load();
+    if (res.ok) { load(); return true; }
+    return false;
   }
 
   async function updateEntry(data) {
@@ -29,7 +30,9 @@ export default function Home() {
     if (res.ok) {
       setEditing(null);
       load();
+      return true;
     }
+    return false;
   }
 
   async function deleteEntry(id) {
