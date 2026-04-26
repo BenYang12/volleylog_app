@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
       ],
     );
     res.status(201).json(rows[0]);
-  } catch (e) {
+  } catch {
     res.status(500).json({ error: "Server error" });
   }
 });
@@ -55,7 +55,7 @@ router.get("/", async (req, res) => {
       [u.id],
     );
     res.json(rows);
-  } catch (e) {
+  } catch {
     res.status(500).json({ error: "Server error" });
   }
 });
@@ -92,7 +92,7 @@ router.put("/:id", async (req, res) => {
     );
     if (!rowCount) return res.status(404).json({ error: "Not found" });
     res.json(rows[0]);
-  } catch (e) {
+  } catch {
     res.status(500).json({ error: "Server error" });
   }
 });
@@ -108,7 +108,7 @@ router.delete("/:id", async (req, res) => {
     );
     if (!rowCount) return res.status(404).json({ error: "Not found" });
     res.json({ ok: true });
-  } catch (e) {
+  } catch {
     res.status(500).json({ error: "Server error" });
   }
 });

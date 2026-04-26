@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
 
     req.session.user = { id: user.id, email: user.email };
     res.json(req.session.user);
-  } catch (e) {
+  } catch {
     res.status(500).json({ error: "Server error" });
   }
 });
